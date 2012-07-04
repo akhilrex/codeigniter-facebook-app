@@ -24,5 +24,3 @@ Setting Up
 > `$CI->config->load("facebook",TRUE);`
 > `$config = $CI->config->item('facebook');`
 > `$this->load->library('Facebook', $config);`
-
-Note: This is not complete yet.

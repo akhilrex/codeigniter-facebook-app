@@ -2,6 +2,15 @@
 
 class Welcome extends CI_Controller {
 
+    public function Welcome(){
+        parent::__construct();
+        parse_str( $_SERVER['QUERY_STRING'], $_REQUEST );
+        $CI = & get_instance();
+        $CI->config->load("facebook",TRUE);
+        $config = $CI->config->item('facebook');
+        $this->load->library('Facebook', $config);
+    }
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -19,7 +28,24 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+        $user = $this->facebook->getUser();
+
+        if ($user) {
+            try {
+               $data['user_profile'] = $this->facebook->api('/me');
+            } catch (FacebookApiException $e) {
+                $user = null;
+            }
+        }
+
+        if ($user) {
+            $data['logout_url'] = $this->facebook->getLogoutUrl();
+        } else {
+            $data['login_url'] = $this->facebook->getLoginUrl();
+        }
+
+        $this->template->title('Home');
+        $this->template->build('welcome/index.php',$data);
 	}
 }
 
