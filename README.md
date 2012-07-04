@@ -18,9 +18,9 @@ Setting Up
 3. Use the following code in the constructor of any controller where you wish to use Facebook api
 
 
-> `parent::__construct();` 
-> `parse_str( $_SERVER['QUERY_STRING'], $_REQUEST );` 
-> `$CI = & get_instance();`
-> `$CI->config->load("facebook",TRUE);`
-> `$config = $CI->config->item('facebook');`
-> `$this->load->library('Facebook', $config);`
+```parent::__construct();
+parse_str( $_SERVER['QUERY_STRING'], $_REQUEST );
+$CI = & get_instance();
+$CI->config->load("facebook",TRUE);
+$config = $CI->config->item('facebook');
+$this->load->library('Facebook', $config);```
