@@ -2,15 +2,6 @@
 
 class Welcome extends CI_Controller {
 
-    public function Welcome(){
-        parent::__construct();
-        parse_str( $_SERVER['QUERY_STRING'], $_REQUEST );
-        $CI = & get_instance();
-        $CI->config->load("facebook",TRUE);
-        $config = $CI->config->item('facebook');
-        $this->load->library('Facebook', $config);
-    }
-
 	/**
 	 * Index Page for this controller.
 	 *
